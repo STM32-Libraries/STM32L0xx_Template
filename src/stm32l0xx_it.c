@@ -11,15 +11,15 @@
  * All rights reserved.
  *********************************************************************************************************************/
 
-#include "stm32l0xx_hal.h"
 #include "stm32l0xx_it.h"
+#include "stm32l0xx_hal.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /*******************************************************************************
- *            Cortex-M0+ Processor Exceptions Handlers                         
+ *            Cortex-M0+ Processor Exceptions Handlers
  ******************************************************************************/
 
 void NMI_Handler(void)
@@ -29,7 +29,7 @@ void NMI_Handler(void)
 void HardFault_Handler(void)
 {
   /* Go to infinite loop when Hard Fault exception occurs */
-  while (1)
+  while(1)
   {
   }
 }
@@ -41,7 +41,6 @@ void SVC_Handler(void)
 void PendSV_Handler(void)
 {
 }
-
 
 void SysTick_Handler(void)
 {
