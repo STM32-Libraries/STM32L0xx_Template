@@ -5,11 +5,9 @@ cmake_minimum_required(VERSION 3.22)
 project(template)
 
 set(CMAKE_SYSTEM_NAME Linux)
-
 set(CMAKE_SYSTEM_PROCESSOR arm)
 
-
-# Set msp-gcc for c files
+# Set gcc-arm for c and c++ files
 set(CMAKE_C_COMPILER $ENV{HOME}/Tools/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc)
 set(CMAKE_CXX_COMPILER $ENV{HOME}/Tools/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-g++)
 
@@ -23,20 +21,33 @@ set(SOURCES
 
 # Include directories
 include_directories(
-                    ${CMAKE_CURRENT_SOURCE_DIR}/include
-                    ${CMAKE_CURRENT_SOURCE_DIR}/conf
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/conf
 )
 
-# Compiler flags
-set(CMAKE_C_FLAGS "-mcpu=cortex-m0plus -nostartfiles -O2 -g -Wall -std=c11 -Wl,-Map=output.map")
-
-# Linker flags
-set(CMAKE_EXE_LINKER_FLAGS "-T ${CMAKE_CURRENT_SOURCE_DIR}/linker/linker.ld")
-
+# Add subdirectory for the HAL library
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/STM32L0xx_HAL_ST stm32l0xx_hal_st)
 
-# add_executable(Libraries src/library.c)
+# Add executable
 add_executable(${PROJECT_NAME}_appl.out ${SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/${PROJECT_NAME}_appl.c)
-target_link_libraries(${PROJECT_NAME}_appl.out 
-                        stm32l0xx_hal_st
+
+# Use target_compile_options to add compile flags for the target
+target_compile_options(${PROJECT_NAME}_appl.out PRIVATE
+    -mcpu=cortex-m0plus
+    -O2
+    -g
+    -Wall
+    -std=c11
 )
+
+# Use target_link_options to add linker flags for the target
+target_link_options(${PROJECT_NAME}_appl.out PRIVATE
+    -T ${CMAKE_CURRENT_SOURCE_DIR}/linker/linker.ld
+    -nostartfiles
+)
+
+# Linker map file option
+set_target_properties(${PROJECT_NAME}_appl.out PROPERTIES LINK_FLAGS "-Wl,-Map=output.map")
+
+# Link the executable with the HAL library
+target_link_libraries(${PROJECT_NAME}_appl.out stm32l0xx_hal_st)
