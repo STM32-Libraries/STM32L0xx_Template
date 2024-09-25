@@ -4,6 +4,8 @@
 extern "C" {
 #endif
 
+static GPIO_InitTypeDef  GPIO_InitStruct;
+
 void SystemClock_Config(void);
 
 int main()
@@ -12,6 +14,23 @@ int main()
 
   /* Configure the system clock to 2 MHz */
   SystemClock_Config();
+
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  // LED = Pin3 PortB
+  GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull  = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Pin = GPIO_PIN_3;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /* Infinite loop */
+  while (1)
+  {
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_3);
+    /* Insert delay 500 ms */
+    HAL_Delay(500);
+  }
 
   while(1)
   {

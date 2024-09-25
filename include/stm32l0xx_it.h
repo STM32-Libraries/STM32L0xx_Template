@@ -1,22 +1,16 @@
-/**
-  ******************************************************************************
-  * @file    GPIO/GPIO_IOToggle/Inc/stm32l0xx_it.h
-  * @author  MCD Application Team
-  * @brief   This file contains the headers of the interrupt handlers.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+/**********************************************************************************************************************
+ * \file stm32l0xx_it.h
+ *
+ * \author  STMicroelectronics
+ *
+ * \date Sep-25-2024
+ *
+ * \version 1.0 \n \n
+ *
+ * Copyright (c) 2016 STMicroelectronics.
+ * All rights reserved.
+ *********************************************************************************************************************/
 
-/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32L0xx_IT_H
 #define __STM32L0xx_IT_H
 
@@ -24,20 +18,68 @@
 extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
-/* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
-
+/*******************************************************************************
+ *
+ * \brief This function is used to 
+ *
+ * \param [in] None
+ * \param [out] None
+ *
+ * \return  None
+ *
+ ******************************************************************************/
 void NMI_Handler(void);
+
+/*******************************************************************************
+ *
+ * \brief This function is used to 
+ *
+ * \param [in] None
+ * \param [out] None
+ *
+ * \return  None
+ *
+ ******************************************************************************/
 void HardFault_Handler(void);
+
+/*******************************************************************************
+ *
+ * \brief This function is used to 
+ *
+ * \param [in] None
+ * \param [out] None
+ *
+ * \return  None
+ *
+ ******************************************************************************/
 void SVC_Handler(void);
+
+/*******************************************************************************
+ *
+ * \brief This function is used to 
+ *
+ * \param [in] None
+ * \param [out] None
+ *
+ * \return  None
+ *
+ ******************************************************************************/
 void PendSV_Handler(void);
+
+/*******************************************************************************
+ *
+ * \brief This function is used to 
+ *
+ * \param [in] None
+ * \param [out] None
+ *
+ * \return  None
+ *
+ ******************************************************************************/
 void SysTick_Handler(void);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __STM32L0xx_IT_H */
+#endif // __STM32L0xx_IT_H
