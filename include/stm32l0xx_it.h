@@ -20,7 +20,7 @@ extern "C" {
 
 /*******************************************************************************
  *
- * \brief This function is used to 
+ * \brief This function is used to
  *
  * \param [in] None
  * \param [out] None
@@ -32,7 +32,7 @@ void NMI_Handler(void);
 
 /*******************************************************************************
  *
- * \brief This function is used to 
+ * \brief This function is used to
  *
  * \param [in] None
  * \param [out] None
@@ -44,7 +44,7 @@ void HardFault_Handler(void);
 
 /*******************************************************************************
  *
- * \brief This function is used to 
+ * \brief This function is used to
  *
  * \param [in] None
  * \param [out] None
@@ -56,7 +56,7 @@ void SVC_Handler(void);
 
 /*******************************************************************************
  *
- * \brief This function is used to 
+ * \brief This function is used to
  *
  * \param [in] None
  * \param [out] None
@@ -68,7 +68,7 @@ void PendSV_Handler(void);
 
 /*******************************************************************************
  *
- * \brief This function is used to 
+ * \brief This function is used to
  *
  * \param [in] None
  * \param [out] None
