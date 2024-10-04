@@ -24,14 +24,6 @@
 extern "C" {
 #endif
 
-void HAL_UART_MspInit(UART_HandleTypeDef* huart)
-{
-}
-
-void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
-{
-}
-
 #ifdef __cplusplus
 }
 #endif
