@@ -19,6 +19,7 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/stm32l0xx_it.c          # Interrupt handler
     ${CMAKE_CURRENT_SOURCE_DIR}/src/system_stm32l0xx.c      # System initialization
     ${CMAKE_CURRENT_SOURCE_DIR}/src/startup.c               # Startup code
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/system_clock.c          # clock configuration
 )
 
 # Include directories
@@ -50,7 +51,7 @@ set(CMAKE_EXE_LINKER_FLAGS "-T ${CMAKE_CURRENT_SOURCE_DIR}/linker/linker.ld \
 )
 
 # Add subdirectory for the STM32 HAL library
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/STM32L0xx_HAL_ST stm32l0xx_hal_st)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third-party/STM32L0xx_HAL_ST stm32l0xx_hal_st)
 
 # Define the executable target for the project
 # This will compile and link the sources into the final executable
