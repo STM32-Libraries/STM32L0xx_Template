@@ -25,7 +25,6 @@ set(SOURCES
 # Include directories
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include  # Header files
-    ${CMAKE_CURRENT_SOURCE_DIR}/conf     # Configuration files
 )
 
 # Compiler flags for the project
