@@ -8,10 +8,6 @@ project(template)
 set(CMAKE_SYSTEM_NAME Linux)  # Cross-compilation for ARM on a Linux host
 set(CMAKE_SYSTEM_PROCESSOR arm)  # Specify the ARM processor architecture
 
-# Set the ARM toolchain (gcc and g++) for C and C++ files
-set(CMAKE_C_COMPILER $ENV{HOME}/Tools/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc)
-set(CMAKE_CXX_COMPILER $ENV{HOME}/Tools/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-g++)
-
 # Define the source files for the project
 set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/template_appl.c         # Main application
