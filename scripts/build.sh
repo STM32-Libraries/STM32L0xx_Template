@@ -1,68 +1,34 @@
 #!/bin/bash
 
-# Function to check if an argument is provided
-check_arguments() {
-    if [ $# -eq 0 ]; then
-        echo "write a valid packet to compile"
-        exit 1
-    fi
-}
+# Exit immediately if any command fails
+set -e  
 
-# Function to check if the packet is valid
-check_valid_packet() {
-    if [ ! -d "$type/$packet" ]; then
-        ls
-        echo "No valid packet $type/$packet"
-        exit 1
-    fi
-}
+# Define the log file location
+LOGFILE="build/build.log"
 
-# Function to compile the packet
-compile_packet() {
-    echo "Compiling $packet $type"
+# Ensure the build directory exists
+mkdir -p build
 
-    cd $type/$packet
-    
-    if [ ! -d "build/" ]; then
-        mkdir build
-    fi
-    
-    cd build
-    export CC=~/Tools/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc
-    export CXX=~/Tools/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-g++
-    export LDFLAGS="--specs=nosys.specs"
-    cmake .. > build.log 2>&1
-    make >> build.log 2>&1
-}
+# Redirect all output (stdout and stderr) to both terminal and log file
+exec > >(tee "$LOGFILE") 2>&1
 
-# Function to compile the library
-compile_library() {
-    if [ ! -d "build/" ]; then
-       mkdir build
-    fi
-    
-    cd build
-    # export CC=~/Tools/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gcc
-    # export CXX=~/Tools/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-g++
-    cmake .. > build.log 2>&1
-    make >> build.log
-}
+echo "🔧 Compiling STM32 project..."
 
-# Navigate to the parent directory
-cd ..
+# Navigate into the build directory
+pushd build > /dev/null
 
-# Check for arguments
-check_arguments "$@"
+# Set environment variables to use the ARM toolchain compilers
+export CC=arm-none-eabi-gcc
+export CXX=arm-none-eabi-g++
 
-type=$1
-packet=$2
+# Run CMake to configure the project
+# The linker flag '--specs=nosys.specs' avoids linking to system-level functions not available in bare-metal
+cmake -DCMAKE_EXE_LINKER_FLAGS="--specs=nosys.specs" ..
 
-# Check if type is "library" and compile accordingly
-if [ "$type" = "library" ]; then
-    compile_library
-else
-    # Check if the packet is valid
-    check_valid_packet
-    # Compile the packet
-    compile_packet
-fi
+# Build the project using all available CPU cores
+make -j$(nproc)
+
+# Return to the original directory
+popd > /dev/null
+
+echo "✅ Build complete."
